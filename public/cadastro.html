@@ -1,0 +1,210 @@
+<div class="row justify-content-center">
+  <div class="row justify-content-center">
+    <h3>Cadastro</h3>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button type="button" class="btn btn-danger btn-lg btn-block" ng-click="getTurmas()"data-toggle="modal" data-target="#cadastroUsuario">
+        Usuário
+      </button>
+      <div class="modal fade" id="cadastroUsuario" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Cadastrar usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="username">Nome</label>
+                    <input type="text" name="nome" class="form-control" ng-model="usuario.nome" required>
+                  </div>
+                  <div class="col">
+                    <label for="username">Matricula</label>
+                    <input type="text" name="matricula" class="form-control" ng-model="usuario.matricula" required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="password">Senha</label>
+                    <input type="password" name="senha" class="form-control" ng-model="usuario.senha" required>
+                  </div>
+                  <div class="col">
+                    <label for="password">Confirmar senha</label>
+                    <input type="password" name="senha" class="form-control" ng-model="usuario.senha2" required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="tipo">Tipo de usuario</label>
+                    <div class="row">
+                      <div class="col" ng-repeat="b in exibicao">
+                        <button type="button" class="btn btn-primary btn-sm btn-block" ng-bind="b" ng-click="exibir($index)"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div ng-show="estado.aluno">
+                  <div class="row form-group">
+                    <div class="col">
+                      <label for="username">Cidade</label>
+                      <input type="text" name="cidade" class="form-control" ng-model="usuario.cidade">
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col">
+                      <label for="Turmas">Turmas</label>
+                      <select class="custom-select"
+                        ng-options="option.ano + '° ' + option.curso for option in turmaData.turmas track by option.id"
+                        ng-model="turmaData.selecionada">
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div ng-show="estado.professor"></div>
+                <div ng-show="estado.funcionario">
+                  <div class="form-group">
+                    <label for="funcao">Função do funcionário</label>
+                    <input type="text" name="funcao" class="form-control" ng-model="usuario.funcao">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="cadastrar()" data-dismiss="modal">Cadastrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row mt-5 mb-5">
+    <div class="col">
+      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#cadastroAluno">
+        Aluno
+      </button>
+      <div class="modal fade" id="cadastroAluno" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Cadastrar aluno</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="username">Nome do aluno</label>
+                  <input type="text" name="nome" class="form-control" ng-model="aluno.nome">
+                </div>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="username">Matrícula do aluno</label>
+                    <input type="text" name="matricula" class="form-control" ng-model="busca.matricula">
+                  </div>
+                  <div class="col">
+                    <label for="username">Cidade</label>
+                    <input type="text" name="cidade" class="form-control" ng-model="aluno.cidade">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="Turmas">Turmas</label>
+                    <select class="custom-select" ng-model="aluno.ano">
+                      <option value="">Anos</option>
+                      <option value="1">1° Ano</option>
+                      <option value="2">2° Ano</option>
+                      <option value="3">3° Ano</option>
+                      <option value="4">4° Ano</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label for="username">Curso</label>
+                    <select class="custom-select" required ng-model="aluno.curso">
+                      <option value="">Cursos</option>
+                      <option value="Informática">Informática</option>
+                      <option value="Geologia">Geologia</option>
+                      <option value="Edificações">Edificações</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="cadastrarAluno()" data-dismiss="modal">Cadastrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#cadastroProfessor">
+        Professor
+      </button>
+      <div class="modal fade" id="cadastroProfessor" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Cadastrar professor</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="nome">Nome do professor</label>
+                  <input type="text" name="nome" class="form-control" ng-model="professor.nome">
+                </div>
+                <div class="form-group">
+                  <label for="matricula">Matrícula do professor</label>
+                  <input type="text" name="matricula" class="form-control" ng-model="professor.matricula">
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="cadastrarProfessor()" data-dismiss="modal">Cadastrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#cadastroFuncionario">
+        Funcionário
+      </button>
+      <div class="modal fade" id="cadastroFuncionario" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Cadastrar funcionário</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="nome">Nome do funcionário</label>
+                  <input type="text" name="nome" class="form-control" ng-model="funcionario.nome">
+                </div>
+                <div class="form-group">
+                  <label for="natricula">Matrícula do funcionário</label>
+                  <input type="text" name="matricula" class="form-control" ng-model="funcionario.matricula">
+                </div>
+                <div class="form-group">
+                  <label for="funcao">Função do funcionário</label>
+                  <input type="text" name="funcao" class="form-control" ng-model="funcionario.funcao">
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="cadastrarFuncionario()" data-dismiss="modal">Cadastrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+</div>

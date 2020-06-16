@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+  <div class="row justify-content-center">
+    <h3>Seus dados</h3>
+  </div>
+</div>
+<div ng-controller="usuarioCtrl as u">
+
+  <div class="content">
+    <div class="row">
+      <div class="col-4">
+
+        <img class="rounded-circle w-50 h-50" ng-src="{{usuario.foto}}" alt="foto do aluno">
+        <div class="col">
+          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter">
+          <i class="fas fa-edit"></i> Editar
+          </button>
+        </div>
+      </div>
+      <div class="col-8">
+        <p><i class="fas fa-user"></i><b> Nome: </b> <span ng-bind="usuario.nome"></span> </p>
+        <p><i class="fas fa-user-graduate"></i></i><b> Cursos: </b> <span ng-bind="usuario.curso"></span></p>
+        <p><i class="fas fa-pen"></i><b> Matricula: </b><span ng-bind="usuario.matricula"></span></p>
+        <p><i class="fas fa-map-marker-alt"></i><b> Cidade: </b><span ng-bind="usuario.Cidade"></span></p>
+
+<!-- lalala -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Editar seus dados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="username">Nome</label>
+                    <input type="text" name="nome" class="form-control" ng-model="usuario.NovoNome" required>
+                  </div>
+                  <div class="col">
+                    <label for="username">Cidade </label>
+                    <input type="text" name="Cidade" class="form-control" ng-model="usuario.NovaCidade" required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="password">Nova Senha</label>
+                    <input type="password" name="senha" class="form-control" ng-model="usuario.NovaSenha" required>
+                  </div>
+                  <div class="col">
+                    <label for="password">Confirmar da nova senha</label>
+                    <input type="password" name="senha" class="form-control" ng-model="usuario.NovaSenha2" required>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col ">
+                    <label for="exampleFormControlFile1">Enviar nova foto</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sai sem salvar seus dados</button>
+                <button type="button" class="btn btn-primary"  data-dismiss="modal" ng-click="AtualizarDados()">Atualizar seus dados</button>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- alala -->
+      </div>
+    </div>
+  </div>
+
+  <h1>Horário</h1>
+  <div class="row">
+    <div class="col-5">
+      <i class="btn fas fa-arrow-left" ng-click="u.voltarDia()"></i>
+      <i class="btn float-right fas fa-arrow-right" ng-click="u.adiantarDia()"></i>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Horário</th>
+            <th scope="col" ng-bind="usuario.horarios[hoje].dia"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="h in usuario.horarios.horas">
+            <th scope="row">{{h}}</th>
+            <td>{{h}}</td>
+            <!-- <th scope="row" ng-bind="h.hora"></th> -->
+            <!-- <td ng-bind="h.aula"></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <!-- disabled -->
+      <button type="button" class="mb-5 btn btn-lg btn-block " disabled
+        ng-class="{ 'btn-danger':!usuario.liberado, 'btn-success':usuario.liberado }">
+        {{ usuario.liberado ? 'Aluno liberado' : 'EM AULA' }}
+      </button>
+      <button ng-click="u.liberar()" ng-show="!usuario.liberado" type="button" class="btn btn-danger btn-lg btn-block">Pedir liberação</button>
+    </div>
+  </div>
+
+
+</div>

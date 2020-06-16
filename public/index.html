@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="syssaida">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/angular/angular.js" charset="utf-8"></script>
+    <script src="node_modules/angular-route/angular-route.js" charset="utf-8"></script>
+    <script src="js/app.js" charset="utf-8"></script>
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      <div class="card mb-3">
+
+        <div class="card-header text-center">
+
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="#!/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/admin">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/usuario">Perfil</a>
+            </li>
+          </ul>
+
+          <!-- <h5 class="card-title">SysSaída</h5>
+          <a href="#!/">Livres</a>
+          <a class="ml-3" href="#!/cadastro">Cadastro</a> -->
+        </div>
+
+        <div class="card-body">
+          <div class="container" ng-view></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script charset="utf-8" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

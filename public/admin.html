@@ -1,0 +1,177 @@
+<div class="row justify-content-center">
+  <div class="row justify-content-center">
+    <h3>Admin</h3>
+  </div>
+</div>
+<div class="content">
+
+  <div class="row justify-content-center">
+    <div class="card col-8">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-auto">
+            <img src="admin.jpg" alt="" width="150px">
+          </div>
+          <div class="col">
+            <p><b>Nome: </b>nome</p>
+            <p><b>Matricula: </b> matricula</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-5 mb-5">
+    <div class="row card-body">
+      <div class="col">
+        <button class="btn btn-primary btn-lg btn-block" type="button" ng-click="getTurmas()"data-toggle="modal" data-target="#cadastroUsuario">
+          Cadastro
+        </button>
+        <div class="modal fade" id="cadastroUsuario" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Cadastrar usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="row form-group">
+                    <div class="col">
+                      <label for="username">Nome</label>
+                      <input type="text" name="nome" class="form-control" ng-model="usuario.nome" required>
+                    </div>
+                    <div class="col">
+                      <label for="username">Matricula</label>
+                      <input type="text" name="matricula" class="form-control" ng-model="usuario.matricula" required>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col">
+                      <label for="password">Senha</label>
+                      <input type="password" name="senha" class="form-control" ng-model="usuario.senha" required>
+                    </div>
+                    <div class="col">
+                      <label for="password">Confirmar senha</label>
+                      <input type="password" name="senha" class="form-control" ng-model="usuario.senha2" required>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col">
+                      <label for="tipo">Tipo de usuario</label>
+                      <div class="row">
+                        <div class="col" ng-repeat="b in exibicao">
+                          <button type="button" class="btn btn-primary btn-sm btn-block" ng-bind="b" ng-click="exibir($index)"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div ng-show="estado.aluno">
+                    <div class="row form-group">
+                      <div class="col">
+                        <label for="username">Cidade</label>
+                        <input type="text" name="cidade" class="form-control" ng-model="usuario.cidade">
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <div class="col">
+                        <label for="Turmas">Turmas</label>
+                        <select class="custom-select"
+                        ng-options="option.ano + '° de ' + option.curso for option in turmaData.turmas track by option.id"
+                        ng-model="turmaData.selecionada">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div ng-show="estado.professor">
+                    <div class="form-group">
+                      <label for="turmas">Turmas para o professor</label>
+
+                      <!-- https://stackoverflow.com/questions/14514461/how-do-i-bind-to-list-of-checkbox-values-with-angularjs -->
+
+                      <div class="list-group" ng-repeat="turma in turmasProfessor">
+                        <div class="list-group-item">
+                            <input type="checkbox" name="selecionado[]" value="{{turma}}"
+                            ng-checked="selecionado.indexOf(turma) > -1" ng-click="turmaSelecionada(turma)">
+                            <label ng-bind="turma"></label>
+                        </div>
+                      </div>
+
+
+
+
+                    </div>
+                  </div>
+                  <div ng-show="estado.funcionario">
+                    <div class="form-group">
+                      <label for="funcao">Função do funcionário</label>
+                      <input type="text" name="funcao" class="form-control" ng-model="usuario.funcao">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="cadastrar()" data-dismiss="modal">Cadastrar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="modal" data-target="#criarTurma">
+          Criar Turma
+        </button>
+        <div class="modal fade" id="criarTurma" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Criação de turmas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="row form-group">
+                    <div class="col">
+                      <label for="username">Ano da turma</label>
+                      <input type="text" name="nome" class="form-control" ng-model="turma.ano" required>
+                    </div>
+                    <div class="col">
+                      <label for="username">Nome do curso</label>
+                      <input type="text" name="nome" class="form-control" ng-model="turma.curso" required>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="criarTurma()" data-dismiss="modal">Criar turma</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-lg btn-block" ng-click="exibirTurmas()" type="button" data-toggle="modal" data-target="#exibirTurmas">
+          Exibir Turmas
+        </button>
+        <div class="modal fade" id="exibirTurmas" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Exibição de turmas criadas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                <div class="list-group">
+                  <button class="btn btn-primary btn-lg btn-block" type="button" name="button"
+                          ng-bind="t.ano + '° ano de ' + t.curso" ng-repeat="t in turmas">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
